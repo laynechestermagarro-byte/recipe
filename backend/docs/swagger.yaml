@@ -1,0 +1,67 @@
+openapi: 3.0.0
+info:
+  title: Recipe Sharing API
+  version: 1.0.0
+  description: API documentation for the Final Project Recipe Sharing App.
+servers:
+  - url: /api/v1
+    description: Base API URL
+
+paths:
+  /recipes:
+    get:
+      tags:
+        - Recipes
+      summary: Retrieve all recipes
+      responses:
+        '200':
+          description: A list of recipes.
+    post:
+      tags:
+        - Recipes
+      summary: Create a new recipe
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: Classic Spaghetti
+                ingredients:
+                  type: array
+                  items:
+                    type: string
+                  example: ["Pasta", "Tomato Sauce", "Meat"]
+                steps:
+                  type: array
+                  items:
+                    type: string
+                    example: ["Boil water", "Mix sauce"]
+                user:
+                  type: string
+                  example: 60d0fe4f1a2e76313b1f501e
+      responses:
+        '201':
+          description: Recipe successfully created.
+
+  /recipes/{id}:
+    get:
+      tags:
+        - Recipes
+      summary: Get recipe by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful retrieval
+        '404':
+          description: Recipe not found
+
+# ... (You need to add paths for PUT, DELETE, /search, /popular, and /user)
